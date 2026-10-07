@@ -1,8 +1,8 @@
-# 🎬 AI Movie Information Extractor
+# 🎬 CinSage — AI Movie Information Extractor
 
-An AI-powered movie information extraction application built using **Google Gemini, LangChain, Pydantic, and Streamlit**.
+**CinSage** is an AI-powered movie information extraction application that converts unstructured movie descriptions into structured movie data using **Google Gemini, LangChain, Pydantic, and Streamlit**.
 
-The application takes an unstructured movie description as input and automatically extracts important movie information such as **title, release year, genre, director, cast, rating, and summary** in a structured format.
+Simply enter a movie description, and CinSage extracts important information such as the **movie title, release year, genre, director, cast, rating, and summary**.
 
 ---
 
@@ -10,77 +10,87 @@ The application takes an unstructured movie description as input and automatical
 
 - 🎬 Extract movie title
 - 📅 Extract release year
-- 🎭 Extract movie genres
+- 🎭 Identify movie genre
 - 🎥 Extract director
 - 👥 Extract cast members
 - ⭐ Extract movie rating
 - 📝 Extract movie summary
 - 🤖 Google Gemini 2.5 Flash integration
 - 🔗 LangChain integration
-- 📋 Pydantic structured output validation
-- 🖥️ Interactive Streamlit UI
-- ⚡ Fast and simple AI-powered extraction
+- 📋 Pydantic structured output
+- 🖥️ Interactive Streamlit interface
+- ⚡ Fast AI-powered information extraction
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Python**
-- **Google Gemini 2.5 Flash**
-- **LangChain**
-- **Pydantic**
-- **Streamlit**
-- **python-dotenv**
+| Technology | Purpose |
+|---|---|
+| 🐍 Python | Programming Language |
+| 🤖 Google Gemini 2.5 Flash | AI / LLM |
+| 🔗 LangChain | LLM Application Framework |
+| 📋 Pydantic | Data Validation & Structured Output |
+| 🎨 Streamlit | Web Interface |
+| 🔐 python-dotenv | Environment Variable Management |
 
 ---
 
 ## 📂 Project Structure
 
 ```text
-Movie-Information-Extractor/
+CinSage/
 │
-├── core.py              # Core AI and movie extraction logic
-├── UIcore.py            # Streamlit user interface
-├── requirements.txt     # Required Python packages
-├── .env                 # API key configuration
-├── .gitignore           # Files ignored by Git
-└── README.md            # Project documentation
+├── CinSage/
+│   ├── core.py          # Core AI and movie extraction logic
+│   └── UIcore.py       # Streamlit user interface
+│
+├── README.md            # Project documentation
+└── requirements.txt     # Project dependencies
 ```
 
 ---
 
-## 🏗️ Project Workflow
+## 🏗️ Architecture
 
 ```text
-                User
+                👤 User
                   │
                   ▼
-          Streamlit UI
-             UIcore.py
-                  │
-                  ▼
-       Movie Description
-                  │
-                  ▼
-             core.py
-                  │
-                  ▼
-        LangChain Prompt
-                  │
-                  ▼
-      Google Gemini 2.5 Flash
-                  │
-                  ▼
-       AI Generated Response
-                  │
-                  ▼
-      Pydantic Output Parser
-                  │
-                  ▼
-       Structured Movie Data
-                  │
-                  ▼
-          Streamlit UI
+        ┌──────────────────┐
+        │   Streamlit UI   │
+        │    UIcore.py     │
+        └────────┬─────────┘
+                 │
+                 ▼
+        Movie Description
+                 │
+                 ▼
+        ┌──────────────────┐
+        │     core.py      │
+        │                  │
+        │ LangChain Prompt │
+        └────────┬─────────┘
+                 │
+                 ▼
+        ┌──────────────────┐
+        │ Google Gemini    │
+        │   2.5 Flash      │
+        └────────┬─────────┘
+                 │
+                 ▼
+        AI Generated Output
+                 │
+                 ▼
+        ┌──────────────────┐
+        │ Pydantic Parser  │
+        └────────┬─────────┘
+                 │
+                 ▼
+        Structured Movie Data
+                 │
+                 ▼
+        🎬 Streamlit Output
 ```
 
 ---
@@ -90,13 +100,13 @@ Movie-Information-Extractor/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/Movie-Information-Extractor.git
+git clone https://github.com/your-username/CinSage.git
 ```
 
 ### 2. Navigate to the Project
 
 ```bash
-cd Movie-Information-Extractor
+cd CinSage
 ```
 
 ### 3. Create a Virtual Environment
@@ -105,7 +115,7 @@ cd Movie-Information-Extractor
 python -m venv venv
 ```
 
-Activate the virtual environment on Windows:
+Activate it on Windows:
 
 ```bash
 venv\Scripts\activate
@@ -119,23 +129,33 @@ pip install -r requirements.txt
 
 ---
 
-## 🔑 API Key Configuration
+## 🔑 API Key Setup
 
-This project uses the **Google Gemini API**.
+CinSage uses the **Google Gemini API**.
 
-Create a `.env` file in the project directory:
+Create a `.env` file in the **root CinSage directory**, at the same level as `README.md` and `requirements.txt`:
+
+```text
+CinSage/
+│
+├── CinSage/
+│   ├── core.py
+│   └── UIcore.py
+│
+├── .env
+├── README.md
+└── requirements.txt
+```
+
+Add your Gemini API key:
 
 ```env
 GOOGLE_API_KEY=your_google_api_key_here
 ```
 
-Replace `your_google_api_key_here` with your actual Google Gemini API key.
+> ⚠️ **Important:** Never upload your `.env` file or API key to GitHub.
 
-### ⚠️ Important
-
-Never upload your `.env` file to GitHub.
-
-Your `.gitignore` should contain:
+Add `.env` to your `.gitignore`:
 
 ```text
 .env
@@ -147,27 +167,27 @@ __pycache__/
 
 ## ▶️ Run the Application
 
-Run the Streamlit application using:
+From the **root CinSage directory**, run:
 
 ```bash
-streamlit run UIcore.py
+streamlit run CinSage/UIcore.py
 ```
 
-After running the command, Streamlit will provide a local URL such as:
+Streamlit will start the application and provide a local URL, usually:
 
 ```text
 http://localhost:8501
 ```
 
-Open it in your browser to use the application.
+Open the URL in your browser.
 
 ---
 
-## 💡 How It Works
+## 💡 How CinSage Works
 
 ### 1. Enter Movie Description
 
-The user enters a movie description into the Streamlit text area.
+The user enters an unstructured movie description.
 
 Example:
 
@@ -178,21 +198,21 @@ Boman Irani. The movie is about three engineering students and their
 college life. It has a rating of 8.4.
 ```
 
-### 2. AI Processing
+### 2. Prompt Processing
 
-The application sends the movie description to **Google Gemini 2.5 Flash** through LangChain.
+The movie description is passed to the LangChain prompt along with the required output format.
 
-### 3. Structured Extraction
+### 3. Gemini Processing
 
-Gemini extracts the required movie information according to the predefined Pydantic schema.
+**Google Gemini 2.5 Flash** analyzes the movie description and extracts the required information.
 
-### 4. Data Validation
+### 4. Structured Output
 
-The `PydanticOutputParser` validates the AI response and converts it into structured data.
+The response is processed using **PydanticOutputParser** to ensure the output follows the predefined movie schema.
 
-### 5. Display Results
+### 5. Display
 
-The application displays the extracted movie information in the Streamlit interface.
+The extracted information is displayed in the Streamlit application as structured data.
 
 ---
 
@@ -221,9 +241,9 @@ The application displays the extracted movie information in the Streamlit interf
 
 ---
 
-## 🧠 Pydantic Schema
+## 🧠 Movie Data Schema
 
-The project uses a Pydantic model to define the expected movie structure:
+CinSage uses a Pydantic model to define the expected output:
 
 ```python
 class Movie(BaseModel):
@@ -236,94 +256,86 @@ class Movie(BaseModel):
     summary: str
 ```
 
-This ensures that the information generated by the LLM follows a consistent structure.
+This provides a consistent structure for the information extracted by the LLM.
 
 ---
 
-## 📁 File Responsibilities
+## 📁 File Description
 
-### `core.py`
+### `CinSage/core.py`
 
-Contains the core AI logic, including:
+Contains the main AI processing logic:
 
-- Gemini model initialization
-- Movie schema
+- Google Gemini model
+- Movie Pydantic schema
 - LangChain prompt
 - Pydantic output parser
 - Movie information extraction
 
-### `UIcore.py`
+### `CinSage/UIcore.py`
 
-Contains the Streamlit user interface, including:
+Contains the Streamlit application:
 
-- Movie paragraph input
+- User input
 - Extract Data button
-- Loading indicator
-- Raw model output
-- Structured movie output
+- Loading state
+- AI response
+- Structured output
 - Error handling
 
 ### `requirements.txt`
 
-Contains all Python dependencies required to run the project.
+Contains the Python packages required to run CinSage.
 
-### `.env`
+### `README.md`
 
-Stores the Gemini API key securely.
-
-### `.gitignore`
-
-Prevents sensitive and unnecessary files from being uploaded to GitHub.
+Contains project documentation, installation instructions, architecture, and usage information.
 
 ---
 
 ## 🎯 Learning Outcomes
 
-This project helped me gain practical experience in:
+Building CinSage helped me gain practical experience in:
 
-- Generative AI
-- Large Language Models (LLMs)
-- Google Gemini API
-- LangChain
-- Prompt Engineering
-- Pydantic
-- Structured Output Parsing
-- Streamlit
-- Python
-- Environment Variable Management
-- AI Application Development
+- 🤖 Generative AI
+- 🧠 Large Language Models
+- 🔗 LangChain
+- ✨ Google Gemini
+- 📝 Prompt Engineering
+- 📋 Pydantic
+- 📊 Structured Data Extraction
+- 🐍 Python
+- 🎨 Streamlit
+- 🔐 Environment Variables
+- 🚀 AI Application Development
 
 ---
 
-## 🔮 Future Improvements
-
-Some possible future enhancements:
+## 🔮 Future Enhancements
 
 - 🎞️ Movie poster integration
-- 🔍 Movie database/API integration
+- 🔍 Movie API/database integration
 - 🌐 Multilingual movie extraction
-- 🎤 Voice input
-- 🤖 Movie recommendation system
-- 💾 Database integration
+- 🎤 Voice-based input
+- 🤖 AI movie recommendation system
+- 💾 Database storage
 - 🔎 Movie search and filtering
-- ☁️ Streamlit Cloud deployment
-- 📱 Improved responsive UI
+- ☁️ Cloud deployment
+- 📱 Responsive UI improvements
 
 ---
 
-## 📸 Project Demo
+## 🎥 Project Demo
 
-### Streamlit Application
+A demonstration video showcasing the CinSage application is available on my LinkedIn profile.
 
-Add your project screenshot here:
+The demo shows:
 
-```text
-![Movie Information Extractor](your-screenshot-link)
-```
-
-### 🎥 Demo Video
-
-Add your LinkedIn/project demo video link here.
+1. Entering a movie description
+2. Sending the description to Gemini
+3. AI-powered information extraction
+4. Structured Pydantic output
+5. Displaying the final movie information
 
 ---
 
@@ -331,24 +343,24 @@ Add your LinkedIn/project demo video link here.
 
 **Nilesh Kamble**
 
-B.Tech — Artificial Intelligence & Data Science
+**B.Tech — Artificial Intelligence & Data Science**
 
 ### Areas of Interest
 
-- 🤖 Artificial Intelligence
-- 📊 Data Science
-- 🧠 Machine Learning
-- 👁️ Computer Vision
-- ✨ Generative AI
+- Artificial Intelligence
+- Data Science
+- Machine Learning
+- Computer Vision
+- Generative AI
 
 ---
 
 ## ⭐ Support
 
-If you find this project useful, please consider giving the repository a ⭐ on GitHub.
+If you found **CinSage** useful or interesting, consider giving the repository a ⭐ on GitHub.
 
 ---
 
 ## 📄 License
 
-This project is developed for educational and learning purposes.
+This project is created for educational and learning purposes.
